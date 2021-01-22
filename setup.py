@@ -18,7 +18,7 @@ from setuptools import find_packages, setup
 setup(
     name="Mars",
     packages=find_packages(include=["mars"]),
-    version="0.1",
+    version="0.2",
     description="Save and load variables magically",
     author="ItsTheGuy",
 )
