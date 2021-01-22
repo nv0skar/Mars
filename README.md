@@ -13,7 +13,7 @@ var1 = mars.mars("var1", True, conf) # Define the var
 var1.set("Hello!") # Change the value
 var1.get() # Get the value
 ```
-If you run the following code you're going to nottice that the value Is saved, under the key name:
+If you run the following code you're going to notice that the value Is saved, under the key name:
 
 ```
 import mars # Import Mars
@@ -34,5 +34,5 @@ You're going to get `"Hello!"`
 
 ## Installation
 That's a good question...
-1. Firstly you have to copy `mars` and import it.\
+1. Firstly you have to copy `mars` and import it.
 #### And you're done! 😂
