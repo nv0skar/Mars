@@ -7,7 +7,7 @@
 - Save files in JSON 🪐
 
 ## Quick Guide
-```
+```python
 import mars # Import Mars
 conf = mars.object("fileName.json", 0) # Set the path of the save file and the save file type
 var1 = mars.mars("var1", True, conf) # Define the var
@@ -16,7 +16,7 @@ var1.get() # Get the value
 ```
 If you run the following code you're going to notice that the value Is saved, under the key name:
 
-```
+```python
 import mars # Import Mars
 conf = mars.object("fileName.json", 0) # Set the path to the save file
 var1 = mars.mars("var1", True, conf) # Define the var
