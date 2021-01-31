@@ -14,11 +14,26 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from setuptools import find_packages, setup
-setup(
-    name="Mars",
-    packages=find_packages(include=["mars"]),
-    version="0.3",
-    description="Save and load variables magically",
-    author="ItsTheGuy",
-)
+import json
+import plistlib
+
+class handler:
+    def __init__(self, type, path):
+        self.type = type
+        self.path = path
+
+    def dump(self, data):
+        if self.type == "json":
+            with open(self.path, "w") as f:
+                json.dump(data, f)
+        elif self.type == "plist":
+            with open(self.path, "wb") as f:
+                plistlib.dump(data, f)
+
+    def load(self):
+        if self.type == "json":
+            with open(self.path, "r") as f:
+                return json.load(f)
+        elif self.type == "plist":
+            with open(self.path, "rb") as f:
+                return plistlib.load(f)

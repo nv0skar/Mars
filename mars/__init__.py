@@ -14,8 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import json
-import plistlib
+from . import file
 
 types = ["json", "plist"]
 
@@ -26,13 +25,12 @@ class object:
 
 class mars:
     def __init__(self, key, value, object):
-        self.path = object.path
         self.__value = value
         self.__default = value
         self.key = key
-        self.type = object.type
+        self.file = file.handler(object.type, object.path)
         try:
-            open(self.path)
+            open(object.path)
         except:
             self.__create()
         try:
@@ -40,40 +38,19 @@ class mars:
         except:
             pass
 
-    def __get_method(self):
-        if self.type == "json":
-            return json
-        elif self.type == "plist":
-            return plistlib
-
-    def __open_param(self, read=False):
-        if self.type == "json":
-            if read:
-                return "r"
-            else:
-                return "w"
-        elif self.type == "plist":
-            if read:
-                return "rb"
-            else:
-                return "wb"
-
     def __create(self):
-        with open(self.path, self.__open_param()) as f:
-            self.__get_method().dump({}, f)
+        self.file.dump({})
 
     def __put(self, file_struct=None, add=False, value=None, brute=False):
-        with open(self.path, self.__open_param()) as f:
-            if add:
-                file_struct.update({self.key: value})
-            if brute:
-                file_struct = {self.key: value}
-            self.__get_method().dump(file_struct, f)
+        if add:
+            file_struct.update({self.key: value})
+        if brute:
+            file_struct = {self.key: value}
+        self.file.dump(file_struct)
 
     def __dump(self, value=None):
         try:
-            with open(self.path, mode=self.__open_param(True)) as f:
-                file_struct = self.__get_method().load(f)
+            file_struct = self.file.load()
         except:
             self.__put(value=value,brute=True)
             return
@@ -86,8 +63,7 @@ class mars:
 
     def __fetch(self, brute=False):
         try:
-            with open(self.path, mode=self.__open_param(True)) as f:
-                file_struct = self.__get_method().load(f)
+            file_struct = self.file.load()
         except:
             return
         for x in file_struct:
