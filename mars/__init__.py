@@ -14,38 +14,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from . import types
 from . import file
 
-types = ["json", "plist"]
+def generate(path, typeN=types.json):
+    for eachType in types.validTypes:
+        if typeN == eachType:
+            return dict(path=path, type=typeN)
+    raise ValueError("Type with reference {} doesn't exist".format(typeN))
 
-class object:
-    def __init__(self, path, typeN=types):
-        self.path = path
-        self.type = types[typeN]
-
-class mars:
-    def __init__(self, key, value, object):
+class element:
+    def __init__(self, key, value, genData):
         self.__value = value
         self.__default = value
         self.key = key
-        self.file = file.handler(object.type, object.path)
-        try:
-            open(object.path)
-        except:
-            self.__create()
-        try:
-            self.__fetch(True)
-        except:
-            pass
+        self.file = file.handler(genData.get("type"), genData.get("path"))
+        try: open(genData.get("path"))
+        except: self.__create()
+        try: self.__fetch(True)
+        except: pass
 
     def __create(self):
         self.file.dump({})
 
     def __put(self, file_struct=None, add=False, value=None, brute=False):
-        if add:
-            file_struct.update({self.key: value})
-        if brute:
-            file_struct = {self.key: value}
+        if add: file_struct.update({self.key: value})
+        if brute: file_struct = {self.key: value}
         self.file.dump(file_struct)
 
     def __dump(self, value=None):
@@ -62,10 +56,8 @@ class mars:
         self.__put(file_struct, True, value)
 
     def __fetch(self, brute=False):
-        try:
-            file_struct = self.file.load()
-        except:
-            return
+        try: file_struct = self.file.load()
+        except: return
         for x in file_struct:
             if x == self.key:
                 if brute:
@@ -79,14 +71,12 @@ class mars:
     def set(self, value):
         try:
             self.__dump(value)
-        except:
-            return
-        self.__value = value
-        pass
+            self.__value = value
+        except TypeError as e: raise TypeError(e)
 
     def get(self):
-        try:
-            self.__fetch()
-        except:
-            return self.__default
+        try: self.__fetch()
+        except: return self.__default
         return self.__value
+
+    def __call__(self): return (self.get())

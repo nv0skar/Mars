@@ -14,11 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from setuptools import find_packages, setup
-setup(
-    name="Mars",
-    packages=find_packages(include=["mars"]),
-    version="0.4",
-    description="Save and load variables magically",
-    author="ItsTheGuy",
-)
+json = 0
+plist = 1
+validTypes = {json, plist}

@@ -14,26 +14,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from . import types
 import json
 import plistlib
 
 class handler:
-    def __init__(self, type, path):
-        self.type = type
+    def __init__(self, typeFile, path):
+        self.type = typeFile
         self.path = path
 
     def dump(self, data):
-        if self.type == "json":
+        if self.type == types.json:
             with open(self.path, "w") as f:
                 json.dump(data, f)
-        elif self.type == "plist":
+        elif self.type == types.plist:
             with open(self.path, "wb") as f:
                 plistlib.dump(data, f)
 
     def load(self):
-        if self.type == "json":
+        if self.type == types.json:
             with open(self.path, "r") as f:
                 return json.load(f)
-        elif self.type == "plist":
+        elif self.type == types.plist:
             with open(self.path, "rb") as f:
                 return plistlib.load(f)
