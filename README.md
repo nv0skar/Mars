@@ -43,4 +43,5 @@ That's a good question...
 
 Or maybe you could...
 1. Generate a wheel and install it.
-#### And it's done! 🎉
+
+**And it's done! 🎉**
