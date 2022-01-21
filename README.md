@@ -1,5 +1,5 @@
 # Mars 🚀
-#### Save and load variables magically 🪄
+#### Save and load values magically 🪄
 Mars is a lightweight config parser that aims to be simple and understandable
 
 ### What can this do?

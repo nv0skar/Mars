@@ -1,4 +1,4 @@
-# Mars | Save and load variables magically
+# Mars | Save and load values magically
 # Copyright (C) 2021 ItsTheGuy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,6 @@ setup(
     name="Mars",
     packages=find_packages(include=["mars"]),
     version="0.4",
-    description="Save and load variables magically",
+    description="Save and load values magically",
     author="ItsTheGuy",
 )

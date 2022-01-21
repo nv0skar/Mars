@@ -1,4 +1,4 @@
-# Mars | Save and load variables magically
+# Mars | Save and load values magically
 # Copyright (C) 2021 ItsTheGuy
 #
 # This program is free software: you can redistribute it and/or modify
